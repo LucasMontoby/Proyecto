@@ -1,29 +1,38 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Familiar1
-from .models import Familiar2
-from .models import Familiar3
-
+from desafio.models import Familiar as flia
 from django.template import loader
+
+
 # Create your views here.
 
 def una_vista(request):
     return HttpResponse('<h1>Proyecto</h1>')
 
+
+
 def un_template(request):
     
-    #template = loader.get_template('index.html')
+    familiares = flia.object.all() #Traer la información 
     
-    familiar1 = Familiar1(nombre='Lucas', phone= f'{123456}', fecha_nacimiento=15/2/1983)
-    familiar2 = Familiar2(nombre='Julian', phone= f'{123456}', fecha_nacimiento=15/2/1983)
-    familiar3 = Familiar3(nombre='Juana',  phone= f'{123456}', fecha_nacimiento=15/2/1983)
+    dicc = { "familiares" : familiares} #relacionar la info de un dicc con un html
+    
+    plantilla = loader.get_template('plantilla.html') #Cargar la plantilla del html
+
+    documento = plantilla.render(dicc) #renderizar la información
+    
+    return HttpResponse(documento) #retornamos la renderización
+
+
+def crear(request):
+    
+    familiar1 = flia(nombre="Lucas", phone= 123456, fecha_nacimiento= '1983-5-14')
+    familiar2 = flia(nombre="Lucas", phone= 123456, fecha_nacimiento= '1983-5-14')
+    familiar3 = flia(nombre="Lucas", phone= 123456, fecha_nacimiento= '1983-5-14')
+    
     familiar1.save()
     familiar2.save()
     familiar3.save()
     
-    #render = template.render({'lista_objetos':[familiar1, familiar2, familiar3]})
+    return HttpResponse('Se cargo con exito')
     
-    #return HttpResponse(render)
-    
-    
-    return render(request, 'idex.html', {'lista_objetos':[familiar1, familiar2, familiar3]})
