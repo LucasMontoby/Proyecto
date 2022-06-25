@@ -17,4 +17,3 @@ class Familiar3(models.Model):
     phone = models.IntegerField(verbose_name='Telefono')
     fecha_nacimiento = models.DateField(null=True)
     
-    
