@@ -13,11 +13,11 @@ def una_vista(request):
 
 def un_template(request):
     
-    familiares = flia.object.all() #Traer la información 
+    familiares = flia.objects.all() #Traer la información 
     
     dicc = { "familiares" : familiares} #relacionar la info de un dicc con un html
     
-    plantilla = loader.get_template('plantilla.html') #Cargar la plantilla del html
+    plantilla = loader.get_template('index.html') #Cargar la plantilla del html
 
     documento = plantilla.render(dicc) #renderizar la información
     
