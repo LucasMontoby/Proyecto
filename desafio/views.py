@@ -35,4 +35,3 @@ def crear(request):
     familiar3.save()
     
     return HttpResponse('Se cargo con exito')
-    
